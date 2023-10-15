@@ -20,12 +20,12 @@ class AlertReceiver : BroadcastReceiver() {
             val pendingIntent = PendingIntent.getActivity(
                 context,
                 NOTIFICATION_ID,
-                Intent("SHOW_NOTIFICATION_ACTION"), // Replace with your main activity
+                Intent("SHOW_NOTIFICATION_ACTION"),
                 PendingIntent.FLAG_IMMUTABLE
             )
 
             val notification = NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_notification) // Replace with your notification icon
+                .setSmallIcon(R.drawable.ic_notification)
                 .setContentTitle("ReLembre")
                 .setContentText("Hora do remedinho")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)

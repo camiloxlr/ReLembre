@@ -170,7 +170,6 @@ fun AlertItemCard(
         }
     }
 }
-
 @Composable
 fun CadastroAlerta(navController: NavHostController, viewModel: MainViewModel = hiltViewModel(), mainActivity: MainActivity, onBack: () -> Unit) {
     var hours by remember { mutableStateOf(0) }
@@ -181,20 +180,17 @@ fun CadastroAlerta(navController: NavHostController, viewModel: MainViewModel = 
 
     val medicineList by viewModel.allMedicines.collectAsState(initial = emptyList())
 
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+    Box(
+        modifier = Modifier.fillMaxSize()
     ) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp)
+                .background(Color.White)
         ) {
-
             TopAppBar (
                 title = { Text(text = "Cadastrar Alerta", color = Color.Black) },
-                Modifier.background(Color.White),
                 navigationIcon = {
                     IconButton(
                         onClick = { onBack() }
@@ -203,7 +199,13 @@ fun CadastroAlerta(navController: NavHostController, viewModel: MainViewModel = 
                     }
                 }
             )
+        }
 
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 56.dp)
+        ) {
             Spacer(modifier = Modifier.height(16.dp))
             AlertInputSection(
                 selectedHour = hours,
@@ -246,7 +248,6 @@ fun CadastroAlerta(navController: NavHostController, viewModel: MainViewModel = 
         }
     }
 }
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

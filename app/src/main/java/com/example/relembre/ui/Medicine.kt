@@ -130,7 +130,6 @@ fun MedicineItemCard(
     }
 }
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CadastroMedicamento(navController: NavHostController, viewModel: MainViewModel = hiltViewModel(), onBack: () -> Unit) {
@@ -138,20 +137,18 @@ fun CadastroMedicamento(navController: NavHostController, viewModel: MainViewMod
     var medicineName by remember { mutableStateOf(("")) }
     var notes by remember { mutableStateOf(("")) }
 
-    Column(
+    Box(
         modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        contentAlignment = Alignment.TopCenter
     ) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp)
+                .background(Color.White)
         ) {
-
-            TopAppBar (
+            TopAppBar(
                 title = { Text(text = "Cadastrar Medicamento", color = Color.Black) },
-                Modifier.background(Color.White),
                 navigationIcon = {
                     IconButton(
                         onClick = { onBack() }
@@ -160,7 +157,13 @@ fun CadastroMedicamento(navController: NavHostController, viewModel: MainViewMod
                     }
                 }
             )
+        }
 
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 56.dp)
+        ) {
             Spacer(modifier = Modifier.height(16.dp))
 
             MedicineInputSection(
@@ -178,7 +181,6 @@ fun CadastroMedicamento(navController: NavHostController, viewModel: MainViewMod
                         medicineName = ""
                         notes = ""
                         navController.navigateUp()
-
                     }
                 }
             )
