@@ -8,9 +8,10 @@ sealed class NavigationItem(val route: String, val label: String, val icons: Ima
 
     object Hoje : NavigationItem("home", "Hoje", Icons.Default.DateRange)
     object Medicamentos :
-        NavigationItem("medicine", "Medicamentos", Icons.Default.Face)
+        NavigationItem("medicine", "Medicamentos", Icons.Default.Info) // Change to pill icon
 
-    object Alertas : NavigationItem("alerts","Alertas",Icons.Default.Star)
+    object Alertas : NavigationItem("alerts", "Alertas", Icons.Default.DateRange) // Change to clock icon
+
 
     object CadastroMedicamento : NavigationItem("storeMedicine","Cadastro de Medicamento",Icons.Default.Search)
     object VisualizarMedicamento : NavigationItem("viewMedicine","Informações do Medicamento",Icons.Default.Search)

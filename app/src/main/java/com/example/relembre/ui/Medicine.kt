@@ -194,38 +194,41 @@ fun VisualizarMedicamento(
     medicineEntity: MedicineEntity,
     onBack: () -> Unit
 ) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+    Box(
+        modifier = Modifier.fillMaxSize()
     ) {
-        TopAppBar(
-            title = { Text(text = "Visualizar Medicamento", color = Color.Black) },
-            Modifier.background(Color.White),
-            navigationIcon = {
-                IconButton(
-                    onClick = { onBack() }
-                ) {
-                    Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
+        Column(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            TopAppBar(
+                title = { Text(text = "Visualizar Medicamento", color = Color.Black) },
+                Modifier.background(Color.White),
+                navigationIcon = {
+                    IconButton(
+                        onClick = { onBack() }
+                    ) {
+                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
+                    }
                 }
-            }
-        )
+            )
 
-        Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-        Text(
-            text = "Nome: ${medicineEntity.name}",
-            style = MaterialTheme.typography.body1
-        )
+            Text(
+                text = "Nome: ${medicineEntity.name}",
+                style = MaterialTheme.typography.body1
+            )
 
-        Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
-        Text(
-            text = "Observações: ${medicineEntity.notes}",
-            style = MaterialTheme.typography.body1
-        )
+            Text(
+                text = "Observações: ${medicineEntity.notes}",
+                style = MaterialTheme.typography.body1
+            )
+        }
     }
 }
+
 
 @Composable
 fun MedicineInputSection(

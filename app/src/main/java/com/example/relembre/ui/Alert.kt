@@ -255,7 +255,7 @@ fun VisualizarAlerta(
     alertEntity: AlertEntity,
     onBack: () -> Unit
 ) {
-    var addToCalendarClicked by remember { mutableStateOf(false )}
+    var addToCalendarClicked by remember { mutableStateOf(false) }
 
     val addToCalendarResult = rememberLauncherForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -263,58 +263,61 @@ fun VisualizarAlerta(
         //
     }
 
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+    Box(
+        modifier = Modifier.fillMaxSize()
     ) {
-        TopAppBar(
-            title = { Text(text = "Visualizar Alerta", color = Color.Black) },
-            Modifier.background(Color.White),
-            navigationIcon = {
-                IconButton(
-                    onClick = { onBack() }
-                ) {
-                    Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
-                }
-            }
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Text(
-            text = "Alert Name: ${alertEntity.medicineId}",
-            style = MaterialTheme.typography.body1
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        Text(
-            text = "Notes: ${alertEntity.notes}",
-            style = MaterialTheme.typography.body1
-        )
-
-        Button(
-            onClick = {
-                addToCalendarClicked = true
-
-                val intent = Intent(Intent.ACTION_INSERT)
-                    .setData(CalendarContract.Events.CONTENT_URI)
-                    .putExtra(CalendarContract.Events.TITLE, "Medicine: ${alertEntity.medicineId}")
-                    .putExtra(
-                        CalendarContract.EXTRA_EVENT_BEGIN_TIME,
-                        calculateEventTime(alertEntity.hours, alertEntity.minutes)
-                    )
-                    .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, calculateEventEndTime(alertEntity.hours, alertEntity.minutes, 1))
-                    .putExtra(CalendarContract.Events.DESCRIPTION, alertEntity.notes)
-
-                addToCalendarResult.launch(intent)
-            }
+        Column(
+            modifier = Modifier.fillMaxSize()
         ) {
-            Text(text = "Add to Calendar")
+            TopAppBar(
+                title = { Text(text = "Visualizar Alerta", color = Color.Black) },
+                Modifier.background(Color.White),
+                navigationIcon = {
+                    IconButton(
+                        onClick = { onBack() }
+                    ) {
+                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
+                    }
+                }
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text(
+                text = "Horário: ${alertEntity.hours}h ${alertEntity.minutes}m",
+                style = MaterialTheme.typography.body1
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Text(
+                text = "Observações: ${alertEntity.notes}",
+                style = MaterialTheme.typography.body1
+            )
+
+            Button(
+                onClick = {
+                    addToCalendarClicked = true
+
+                    val intent = Intent(Intent.ACTION_INSERT)
+                        .setData(CalendarContract.Events.CONTENT_URI)
+                        .putExtra(CalendarContract.Events.TITLE, "Medicine: ${alertEntity.medicineId}")
+                        .putExtra(
+                            CalendarContract.EXTRA_EVENT_BEGIN_TIME,
+                            calculateEventTime(alertEntity.hours, alertEntity.minutes)
+                        )
+                        .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, calculateEventEndTime(alertEntity.hours, alertEntity.minutes, 1))
+                        .putExtra(CalendarContract.Events.DESCRIPTION, alertEntity.notes)
+
+                    addToCalendarResult.launch(intent)
+                }
+            ) {
+                Text(text = "Salvar na agenda")
+            }
         }
     }
 }
+
 
 @Composable
 fun AlertInputSection(
